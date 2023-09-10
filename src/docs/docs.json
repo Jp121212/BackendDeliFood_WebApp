@@ -1,0 +1,168 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Swagger DeliFood API",
+    "description": "",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "servers": [{ "url": "" }],
+  "tags": [
+    {
+      "name": "User Auth",
+      "description": "Authentication."
+    }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["User Auth"],
+        "summary": "Create a new user account",
+        "description": "Create a new user account",
+        "requestBody": {
+          "description": "Create a new user account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/registerBody"
+              }
+            },
+            "required": true
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully registered"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "409": {
+            "description": "User already exists"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["User Auth"],
+        "summary": "Log in to an existing user account",
+        "description": "Log in to an existing user account",
+        "requestBody": {
+          "description": "Log in to an existing user account",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/loginBody"
+              }
+            },
+            "required": true
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "loginBody": {
+      "type": "object",
+      "required": ["email", "password"],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "refreshTokenBody": {
+      "type": "object",
+      "required": ["refreshToken"],
+      "properties": {
+        "refreshToken": {
+          "type": "string"
+        }
+      }
+    },
+
+    "authResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string"
+        }
+      }
+    },
+    "registerBody": {
+      "type": "object",
+      "required": ["email", "password", "phone", "codephone"],
+      "properties": {
+        "phone": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "codephone": {
+          "type": "string"
+        }
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "required": ["email", "password", "phone", "codephone"],
+        "properties": {
+          "phone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "codephone": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          },
+          "role": {
+            "type": "role"
+          },
+          "membership": {
+            "type": "membership"
+          },
+          "payment": {
+            "type": "payment"
+          },
+          "createdAt": {
+            "type": "date"
+          },
+          "updatedAt": {
+            "type": "date"
+          }
+          }
+
+        }
+      }
+    }
+  }

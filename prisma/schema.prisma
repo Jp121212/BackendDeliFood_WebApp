@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+  SUPPORT
+  DRIVER
+}
+
+enum paymentMethod {
+  CASH
+  CARD
+  DELIPOINTS
+}
+
+enum Membership {
+  FREE
+  PREMIUM
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+  email         String        @unique
+  name          String?
+  phone         String       
+  codephone     String
+  password      String
+  image         String?
+  address       String?
+  membership    Membership    @default(FREE)
+  paymentMethod paymentMethod @default(CASH)
+  role          Role          @default(USER)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
