@@ -1,6 +1,6 @@
-# Doreads API
+# DeliFood API
 
-APi for Doreads APP
+APi for DeliFood APP
 
 ## Requirements
 
